@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
+import { SessionProvider } from "@/contexts/SessionContext";
+import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 import WindowHeader from "@/components/window-header";
 
@@ -35,10 +37,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex flex-col h-screen">
-            <WindowHeader />
-            <main className="flex-1 overflow-hidden">{children}</main>
-          </div>
+          <SessionProvider>
+            <div className="flex flex-col h-screen">
+              <WindowHeader />
+              <main className="flex-1 overflow-hidden">{children}</main>
+            </div>
+            <Toaster />
+          </SessionProvider>
         </ThemeProvider>
       </body>
     </html>
