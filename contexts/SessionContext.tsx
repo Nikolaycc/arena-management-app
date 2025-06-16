@@ -2,33 +2,8 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-
-interface User {
-  id: string;
-  nationalId: string;
-  phoneNumber: string;
-  email?: string;
-  firstName: string;
-  lastName: string;
-  profileImageUrl?: string;
-  birthDate?: string;
-  address?: string;
-  adult: boolean;
-  gender: "M" | "F" | "O";
-  status: "active" | "suspended" | "inactive";
-  emailVerified: boolean;
-  phoneVerified: boolean;
-  metadata: any;
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface SessionData {
-  accessToken: string;
-  refreshToken: string;
-  user: User;
-  expiresAt: number;
-}
+import { fetch } from "@tauri-apps/plugin-http";
+import { User, SessionData } from "@/types/index";
 
 interface SessionContextType {
   session: SessionData | null;
@@ -124,7 +99,10 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
         throw new Error("Failed to fetch user profile");
       }
 
-      return await response.json();
+      const user = await response.json();
+      console.log(user);
+
+      return user;
     } catch (error) {
       console.error("Failed to fetch user profile:", error);
       return null;
@@ -148,6 +126,7 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
 
       // Fetch user profile
       const user = await fetchUserProfile(tokens.accessToken);
+      console.log(user);
       if (!user) {
         throw new Error("Failed to fetch user profile");
       }

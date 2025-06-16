@@ -96,7 +96,7 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
     await login(data);
 
     toast.success("Login successful!");
-    router.push("/dashboard"); // or wherever you want to redirect
+    router.push("/"); // or wherever you want to redirect
     try {
     } catch (error) {
       console.error("Verify OTP error:", error);

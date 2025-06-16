@@ -1,4 +1,4 @@
-use tauri::{TitleBarStyle, WebviewUrl, WebviewWindowBuilder};
+use tauri::{LogicalPosition, TitleBarStyle, WebviewUrl, WebviewWindowBuilder};
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -12,6 +12,9 @@ pub fn run() {
 
             #[cfg(target_os = "macos")]
             let win_builder = win_builder.title_bar_style(TitleBarStyle::Overlay);
+
+            #[cfg(target_os = "macos")]
+            let win_builder = win_builder.traffic_light_position(LogicalPosition::new(20.0, 24.0));
 
             #[cfg(target_os = "windows")]
             let win_builder = win_builder.decorations(false);

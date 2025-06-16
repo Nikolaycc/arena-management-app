@@ -31,65 +31,67 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
 } from "@/components/ui/sidebar";
-
-const data = {
-  user: {
-    name: "Niko Gogitadze",
-    email: "gogitadzeniko0@gmail.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  navMain: [
-    {
-      title: "Dashboard",
-      url: "#",
-      icon: IconDashboard,
-    },
-    {
-      title: "Users",
-      url: "#",
-      icon: IconUsers,
-    },
-    {
-      title: "Packets",
-      url: "#",
-      icon: IconShoppingCart,
-    },
-    {
-      title: "Inventory",
-      url: "#",
-      icon: IconPackage,
-    },
-    {
-      title: "Analytics",
-      url: "#",
-      icon: IconChartBar,
-    },
-  ],
-
-  navSecondary: [
-    {
-      title: "Settings",
-      url: "#",
-      icon: IconSettings,
-    },
-  ],
-  documents: [
-    {
-      name: "Reports",
-      url: "#",
-      icon: IconReport,
-    },
-  ],
-};
+import { useSession } from "@/contexts/SessionContext";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { user, isLoading } = useSession();
+
+  if (isLoading) return null;
+  if (!user) return null;
+
+  const data = {
+    user: {
+      name: user.firstName + " " + user.lastName,
+      email: user.phoneNumber,
+      avatar: "/avatars/shadcn.jpg",
+    },
+    navMain: [
+      {
+        title: "Dashboard",
+        url: "/",
+        icon: IconDashboard,
+      },
+      {
+        title: "Users",
+        url: "/users",
+        icon: IconUsers,
+      },
+      {
+        title: "Packets",
+        url: "#",
+        icon: IconShoppingCart,
+      },
+      {
+        title: "Inventory",
+        url: "#",
+        icon: IconPackage,
+      },
+      {
+        title: "Analytics",
+        url: "#",
+        icon: IconChartBar,
+      },
+    ],
+
+    navSecondary: [
+      {
+        title: "Settings",
+        url: "#",
+        icon: IconSettings,
+      },
+    ],
+    documents: [
+      {
+        name: "Reports",
+        url: "#",
+        icon: IconReport,
+      },
+    ],
+  };
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader className="h-7"></SidebarHeader>
+      <SidebarHeader className="h-13"></SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
         <NavDocuments items={data.documents} />
