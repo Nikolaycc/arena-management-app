@@ -3,10 +3,11 @@ use tauri::{LogicalPosition, TitleBarStyle, WebviewUrl, WebviewWindowBuilder};
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_os::init())
         .plugin(tauri_plugin_http::init())
         .setup(|app| {
             let win_builder = WebviewWindowBuilder::new(app, "main", WebviewUrl::default())
-                .title("Transparent Titlebar Window")
+                .title("Arena Sports")
                 .inner_size(1000.0, 800.0)
                 .min_inner_size(900.0, 700.0);
 

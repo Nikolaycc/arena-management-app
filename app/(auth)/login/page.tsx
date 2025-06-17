@@ -7,7 +7,7 @@ const nicoMoji = localFont({
 
 export default function LoginPage() {
   return (
-    <div className="grid min-h-svh lg:grid-cols-2">
+    <div className="grid min-h-full lg:grid-cols-2">
       <div className="flex flex-col gap-0 p-6 md:p-10">
         <div className="flex justify-center gap-2">
           <a

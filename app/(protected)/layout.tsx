@@ -1,7 +1,6 @@
 "use client";
 
 import { AppSidebar } from "@/components/app-sidebar";
-import { SidebarProvider } from "@/components/ui/sidebar";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 
 export default function DashboardLayout({
@@ -11,18 +10,10 @@ export default function DashboardLayout({
 }) {
   return (
     <ProtectedRoute>
-      <SidebarProvider
-        className="h-full"
-        style={
-          {
-            "--sidebar-width": "calc(var(--spacing) * 50)",
-            "--header-height": "calc(var(--spacing) * 12)",
-          } as React.CSSProperties
-        }
-      >
+      <div className="flex h-full w-full">
         <AppSidebar variant="sidebar" />
-        {children}
-      </SidebarProvider>
+        <div className="flex-1 min-w-0">{children}</div>
+      </div>
     </ProtectedRoute>
   );
 }
