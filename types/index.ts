@@ -18,9 +18,29 @@ export interface User {
   updatedAt: string;
 }
 
+export interface Permission {
+  id: string;
+  name: string;
+  description?: string | null;
+}
+
+export interface Role {
+  id: string;
+  name: string;
+  description?: string | null;
+}
+
+export interface UserPermissions {
+  userId: string;
+  roles: Role[];
+  permissions: Permission[];
+  permissionNames: string[];
+}
+
 export interface SessionData {
   accessToken: string;
   refreshToken: string;
   user: User;
+  permissions?: UserPermissions;
   expiresAt: number;
 }
