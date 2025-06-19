@@ -263,8 +263,9 @@ export const userColumns: ColumnDef<User>[] = [
   {
     id: "actions",
     enableHiding: false,
-    cell: ({ row }) => {
+    cell: ({ row, table }) => {
       const user = row.original;
+      const meta = table.options.meta as any;
 
       return (
         <DropdownMenu>
@@ -282,15 +283,18 @@ export const userColumns: ColumnDef<User>[] = [
               Copy user ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={() => meta?.onViewDetails?.(user)}>
               <Eye className="mr-2 h-4 w-4" />
               View details
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={() => meta?.onEdit?.(user)}>
               <Edit className="mr-2 h-4 w-4" />
               Edit user
             </DropdownMenuItem>
-            <DropdownMenuItem className="text-red-600">
+            <DropdownMenuItem
+              className="text-red-600"
+              onClick={() => meta?.onDelete?.(user)}
+            >
               <Trash2 className="mr-2 h-4 w-4" />
               Delete user
             </DropdownMenuItem>

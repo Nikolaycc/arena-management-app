@@ -10,7 +10,7 @@ export interface User {
   address?: string;
   adult: boolean;
   gender: "M" | "F" | "O";
-  status: "active" | "suspended" | "inactive";
+  status: "ACTIVE" | "SUSPENDED" | "INACTIVE";
   emailVerified: boolean;
   phoneVerified: boolean;
   metadata: any;

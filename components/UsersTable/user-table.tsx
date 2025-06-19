@@ -19,16 +19,27 @@ import {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  onEdit?: (user: TData) => void;
+  onDelete?: (user: TData) => void;
+  onViewDetails?: (user: TData) => void;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  onEdit,
+  onDelete,
+  onViewDetails,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    meta: {
+      onEdit,
+      onDelete,
+      onViewDetails,
+    },
   });
 
   return (
